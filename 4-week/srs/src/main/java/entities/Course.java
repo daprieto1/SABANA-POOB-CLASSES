@@ -1,13 +1,17 @@
+package entities;
+
 import java.util.*;
 
 /**
- * Represents a Course. <br><br>
+ * Represents a entities.Course. <br><br>
  * Invariants:
  * 1. MAXIMUM_QUOTA > 0
  * 2. MAXIMUM_QUOTA >= number of registered students. <br><br>
  *
  * @author diego.prieto
  */
+
+
 public class Course {
 
     public static final int MAXIMUM_QUOTA = 30;
@@ -15,6 +19,11 @@ public class Course {
     private int id;
     private String name;
     private List<Student> students;
+    private List<Course> prerequisites;
+
+
+
+
     private Set<Student> studentSet;
 
     public Course(int id, String name) {
@@ -38,7 +47,7 @@ public class Course {
      * @param student The student to be added.
      * @return true if the student was successfully regustered, otherwise false.
      */
-    public boolean registerL(Student student) {
+    public boolean register(Student student) {
         boolean exists = false;
         boolean result = false;
 
@@ -57,10 +66,11 @@ public class Course {
         return result;
     }
 
-    public boolean register(Student student) {
+    public boolean registerS(Student student) {
 
-        if (MAXIMUM_QUOTA > this.studentSet.size())
+        if (MAXIMUM_QUOTA > this.studentSet.size()) {
             return this.studentSet.add(student);
+        }
 
         return false;
     }
@@ -77,13 +87,13 @@ public class Course {
             return true;
         }
 
-        /* Check if o is an instance of Student or not
+        /* Check if o is an instance of entities.Student or not
           "null instanceof [type]" also returns false */
         if (!(o instanceof Course)) {
             return false;
         }
 
-        // typecast o to Student so that we can compare data members
+        // typecast o to entities.Student so that we can compare data members
         Course c = (Course) o;
 
         // Compare the data members and return accordingly

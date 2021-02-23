@@ -55,19 +55,6 @@ public class CourseArrayList implements CourseCollectionsExample {
 
     @Override
     public Student getStudent(Student s) {
-        /*int i;
-        boolean found = false;
-        for (i = 0; i < numRegisteredStudents() && !found; i++) {
-            found = students.contains(s);
-        }
-        return found ? students.get(i - 1) : null;*/
-
-        /*Student result = null;
-        for (Student student : students) {
-            if (student.equals(s))
-                result = student;
-        }
-        return result;*/
 
         Optional<Student> result = students.stream().filter(st -> st.equals(s)).findFirst();
         return result.isPresent() ? result.get() : null;
@@ -75,6 +62,13 @@ public class CourseArrayList implements CourseCollectionsExample {
 
     @Override
     public Student updateStudent(Student s) {
-        return null;
+        Student result = null;
+        for (int i = 0; i < numRegisteredStudents() && result == null; i++) {
+            if (students.get(i).equals(s)) {
+                students.set(i, s);
+                result = students.get(i);
+            }
+        }
+        return result;
     }
 }

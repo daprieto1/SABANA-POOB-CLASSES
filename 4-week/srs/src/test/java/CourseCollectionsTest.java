@@ -1,7 +1,6 @@
-import collections.CourseArrayList;
-import collections.CourseCollectionsExample;
-import entities.Course;
+import collections.*;
 import entities.Student;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,12 +8,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CourseCollectionsTest {
 
+    private CourseCollectionsExample course;
+
+    /**
+     * Método para configurar las pruebas.
+     * Se ejecuta antes de cada método anotado con @Test.
+     *
+     * Descomente la implmentación que necesite para verificar su funcionamiento.
+     */
+    @BeforeEach
+    public void setup() {
+        this.course = new CourseArrayList();
+        //this.course = new CourseSet();
+        //this.course = new CourseMap();
+        //this.course = new CourseArray();
+    }
+
     @Test
     void shouldAddAStudent() {
 
         Student student1 = new Student(1, "Juan");
         Student student2 = new Student(2, "Pedro");
-        CourseCollectionsExample course = new CourseArrayList();
 
         assertTrue(course.addStudent(student1), "The student was successfully registered");
         assertTrue(course.addStudent(student2), "The student was successfully registered");
@@ -26,7 +40,6 @@ public class CourseCollectionsTest {
 
         Student student1 = new Student(1, "Juan");
         Student student2 = new Student(1, "Pedro");
-        CourseCollectionsExample course = new CourseArrayList();
 
         assertTrue(course.addStudent(student1), "The student was successfully registered");
         assertFalse(course.addStudent(student2), "The student was not successfully registered");
@@ -37,7 +50,6 @@ public class CourseCollectionsTest {
     void shouldNotAddAStudentWhenNoQuota() {
 
         Student student1 = new Student(1, "Juan");
-        CourseCollectionsExample course = new CourseArrayList();
 
         for (int i = 0; i < course.numMaxStudents(); i++)
             course.addStudent(new Student(i, "Juan " + i));
@@ -51,7 +63,6 @@ public class CourseCollectionsTest {
 
         Student student1 = new Student(1, "Juan");
         Student student2 = new Student(2, "Pedro");
-        CourseCollectionsExample course = new CourseArrayList();
 
         assertTrue(course.addStudent(student1), "The student was successfully registered");
         assertTrue(course.addStudent(student2), "The student was successfully registered");
@@ -67,7 +78,6 @@ public class CourseCollectionsTest {
         Student student1 = new Student(1, "Juan");
         Student student2 = new Student(2, "Pedro");
         Student student3 = new Student(3, "Maria");
-        CourseCollectionsExample course = new CourseArrayList();
 
         assertTrue(course.addStudent(student1), "The student was successfully registered");
         assertTrue(course.addStudent(student2), "The student was successfully registered");
@@ -82,7 +92,6 @@ public class CourseCollectionsTest {
 
         Student student1 = new Student(1, "Juan");
         Student student2 = new Student(2, "Pedro");
-        CourseCollectionsExample course = new CourseArrayList();
 
         assertTrue(course.addStudent(student1), "The student was successfully registered");
         assertTrue(course.addStudent(student2), "The student was successfully registered");
@@ -97,7 +106,6 @@ public class CourseCollectionsTest {
         Student student1 = new Student(1, "Juan");
         Student student2 = new Student(2, "Pedro");
         Student student3 = new Student(3, "Maria");
-        CourseCollectionsExample course = new CourseArrayList();
 
         assertTrue(course.addStudent(student1), "The student was successfully registered");
         assertTrue(course.addStudent(student2), "The student was successfully registered");
@@ -112,7 +120,6 @@ public class CourseCollectionsTest {
 
         Student student1 = new Student(1, "Juan");
         Student student2 = new Student(2, "Pedro");
-        CourseCollectionsExample course = new CourseArrayList();
 
         assertTrue(course.addStudent(student1), "The student was successfully registered");
         assertTrue(course.addStudent(student2), "The student was successfully registered");
@@ -129,7 +136,6 @@ public class CourseCollectionsTest {
         Student student1 = new Student(1, "Juan");
         Student student2 = new Student(2, "Pedro");
         Student student3 = new Student(3, "Maria");
-        CourseCollectionsExample course = new CourseArrayList();
 
         assertTrue(course.addStudent(student1), "The student was successfully registered");
         assertTrue(course.addStudent(student2), "The student was successfully registered");

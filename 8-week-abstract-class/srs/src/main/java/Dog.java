@@ -8,4 +8,7 @@ public class Dog extends Animal {
     public String greeting() {
         return "Wof Wof!!!";
     }
+
+
+
 }

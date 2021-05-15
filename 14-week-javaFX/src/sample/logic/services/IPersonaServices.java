@@ -8,12 +8,15 @@ import java.util.UUID;
 
 public interface IPersonaServices {
 
-    ObservableList<Persona> getAll();
+    List<Persona> getAll();
 
     Persona getById(UUID id);
 
     Persona insert(Persona persona);
 
     void delete(List<Persona> personas);
+
+    void export() throws Exception;
+
 
 }

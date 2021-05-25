@@ -3,3 +3,4 @@ build
 docs
 .gradle
 .DS_Store
+.csv

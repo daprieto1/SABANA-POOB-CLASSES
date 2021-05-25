@@ -9,12 +9,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.logic.PersonaException;
 import sample.logic.entities.Persona;
 import sample.logic.services.IPersonaServices;
 import sample.logic.services.impl.PersonaService;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,14 +44,15 @@ public class BasicScene extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         setUp();
-        behavior();
+        behavior(primaryStage);
 
         primaryStage.setTitle("Sabana Example");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
-    private void behavior() {
+    private void behavior(Stage stage) {
         this.personaServices = new PersonaService();
         try {
             this.personaServices.insert(new Persona("Diego", "Prieto", "25"));
@@ -73,6 +77,7 @@ public class BasicScene extends Application {
         });
 
         deletePersona.setOnAction(e -> {
+
             this.personaServices.delete(personasTable.getSelectionModel().getSelectedItems());
         });
 
@@ -81,6 +86,22 @@ public class BasicScene extends Application {
                 this.personaServices.export();
             } catch (Exception exception) {
                 exception.printStackTrace();
+            }
+        });
+
+        fileMenuItems.get("Import").setOnAction(e -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select personas file");
+            File file = fileChooser.showOpenDialog(stage);
+            if (file == null) {
+                System.out.println("No file");
+            } else {
+                try {
+                    this.personaServices.importPersonas(file);
+                    this.personaServices.getAll().stream().forEach(p -> System.out.println(p));
+                } catch (IOException | PersonaException ioException) {
+                    ioException.printStackTrace();
+                }
             }
         });
     }

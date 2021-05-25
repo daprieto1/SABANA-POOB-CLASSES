@@ -47,6 +47,11 @@ public class Persona extends Exportable implements Serializable {
         return "The age is " + this.age;
     }
 
+    @Override
+    public String toString(){
+
+        return String.format("Name = %s, LastName = %s, Age = %s", this.name, this.lastName, this.age);
+    }
 
     @Override
     public List<String> toListString() {

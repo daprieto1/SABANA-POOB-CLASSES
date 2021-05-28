@@ -13,10 +13,14 @@ public class Persona extends Exportable implements Serializable {
     private String name;
     private String lastName;
     private int age;
+    private Enum profession;
+    private boolean isVictim;
 
-    public Persona(String name, String lastName, String age) throws PersonaException {
+    public Persona(String name, String lastName, String age, Enum profession, boolean isVictim) throws PersonaException {
         this.name = name;
         this.lastName = lastName;
+        this.profession = profession;
+        this.isVictim = isVictim;
         // this.id = UUID.randomUUID();
         this.setAge(age);
     }
@@ -47,8 +51,16 @@ public class Persona extends Exportable implements Serializable {
         return "The age is " + this.age;
     }
 
+    public Enum getProfession() {
+        return profession;
+    }
+
+    public boolean isVictim() {
+        return isVictim;
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
 
         return String.format("Name = %s, LastName = %s, Age = %s", this.name, this.lastName, this.age);
     }

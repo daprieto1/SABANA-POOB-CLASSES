@@ -32,6 +32,7 @@ public class BasicScene extends Application {
     private TextField ageInput;
     private Button addPersona;
     private Button deletePersona;
+    private Button openReport;
 
     // Menu
     private MenuBar menuBar;
@@ -56,9 +57,9 @@ public class BasicScene extends Application {
     private void behavior(Stage stage) {
         this.personaServices = new PersonaService();
         try {
-            this.personaServices.insert(new Persona("Diego", "Prieto", "25"));
-            this.personaServices.insert(new Persona("Maria", "Rdriguez", "12"));
-            this.personaServices.insert(new Persona("Carlos", "Henao", "100"));
+            this.personaServices.insert(new Persona("Diego", "Prieto", "25", ProfessionEmun.LAWYER, false));
+            this.personaServices.insert(new Persona("Maria", "Rdriguez", "12", ProfessionEmun.POLICE, false));
+            this.personaServices.insert(new Persona("Carlos", "Henao", "100", ProfessionEmun.UNEMPLOYED, true));
         } catch (PersonaException e) {
             e.printStackTrace();
         }
@@ -66,21 +67,8 @@ public class BasicScene extends Application {
         personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
 
         addPersona.setOnAction(e -> {
-            Label secondLabel = new Label("I'm a Label on new Window");
 
-            StackPane secondaryLayout = new StackPane();
-            secondaryLayout.getChildren().add(secondLabel);
-
-            Scene secondScene = new Scene(secondaryLayout, 230, 100);
-
-            // New window (Stage)
-            Stage newWindow = new Stage();
-            newWindow.setTitle("Second Stage");
-            newWindow.setScene(secondScene);
-
-
-            newWindow.show();
-            /*try {
+            try {
                 Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), ageInput.getText());
                 this.personaServices.insert(p);
                 nameInput.clear();
@@ -88,7 +76,7 @@ public class BasicScene extends Application {
                 ageInput.clear();
             } catch (PersonaException personaException) {
                 personaException.printStackTrace();
-            }*/
+            }
         });
 
         deletePersona.setOnAction(e -> {
@@ -119,6 +107,10 @@ public class BasicScene extends Application {
                 }
             }
         });
+
+        openReport.setOnAction(e -> {
+            new ReportStage();
+        });
     }
 
     private void setUp() {
@@ -130,7 +122,7 @@ public class BasicScene extends Application {
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(10, 10, 10, 10));
         hBox.setSpacing(10);
-        hBox.getChildren().addAll(nameInput, lastNameInput, ageInput, addPersona, deletePersona);
+        hBox.getChildren().addAll(nameInput, lastNameInput, ageInput, addPersona, deletePersona, openReport);
 
         //Layout
         VBox layout = new VBox(10);
@@ -151,6 +143,9 @@ public class BasicScene extends Application {
 
         deletePersona = new Button("Delete");
         deletePersona.setMinWidth(30);
+
+        openReport = new Button("Open Report");
+        openReport.setMinWidth(90);
     }
 
     private void setupInputs() {

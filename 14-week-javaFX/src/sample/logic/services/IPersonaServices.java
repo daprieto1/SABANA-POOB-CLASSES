@@ -21,6 +21,6 @@ public interface IPersonaServices {
 
     void export() throws Exception;
 
-    List<Persona> importPersonas(File file) throws IOException, PersonaException;
+    List<Persona> importPersonas(File file) throws Exception;
 
 }

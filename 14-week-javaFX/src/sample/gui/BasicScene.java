@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -65,7 +66,21 @@ public class BasicScene extends Application {
         personasTable.setItems((ObservableList<Persona>) this.personaServices.getAll());
 
         addPersona.setOnAction(e -> {
-            try {
+            Label secondLabel = new Label("I'm a Label on new Window");
+
+            StackPane secondaryLayout = new StackPane();
+            secondaryLayout.getChildren().add(secondLabel);
+
+            Scene secondScene = new Scene(secondaryLayout, 230, 100);
+
+            // New window (Stage)
+            Stage newWindow = new Stage();
+            newWindow.setTitle("Second Stage");
+            newWindow.setScene(secondScene);
+
+
+            newWindow.show();
+            /*try {
                 Persona p = new Persona(nameInput.getText(), lastNameInput.getText(), ageInput.getText());
                 this.personaServices.insert(p);
                 nameInput.clear();
@@ -73,7 +88,7 @@ public class BasicScene extends Application {
                 ageInput.clear();
             } catch (PersonaException personaException) {
                 personaException.printStackTrace();
-            }
+            }*/
         });
 
         deletePersona.setOnAction(e -> {
@@ -99,8 +114,8 @@ public class BasicScene extends Application {
                 try {
                     this.personaServices.importPersonas(file);
                     this.personaServices.getAll().stream().forEach(p -> System.out.println(p));
-                } catch (IOException | PersonaException ioException) {
-                    ioException.printStackTrace();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
         });
@@ -124,6 +139,7 @@ public class BasicScene extends Application {
 
         BorderPane layout2 = new BorderPane();
         layout2.setTop(menuBar);
+        layout2.setCenter(layout);
 
         //Scene
         scene = new Scene(layout2, 400, 400);

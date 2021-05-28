@@ -38,18 +38,14 @@ public class PersonaPersistence implements IPersonaPersistence {
     }
 
     public List<Persona> read(File file) throws Exception {
-        if (!getFileExtension(file.getName()).equals(PERSONAS_FILE_EXTENSION)) {
-            throw new Exception("The file has not the right extension");
-        }
+
 
         return read(file.getAbsolutePath());
     }
 
     @Override
     public List<String> importPersonas(File file) throws Exception {
-        if (!getFileExtension(file.getName()).equals(Exportable.CSV)) {
-            throw new Exception("The file has not the right extension");
-        }
+
 
         List<String> personas = new ArrayList<>();
         FileReader fr = new FileReader(file);
@@ -64,10 +60,6 @@ public class PersonaPersistence implements IPersonaPersistence {
 
         br.close();
         return personas;
-    }
-
-    private String getFileExtension(String fileName) {
-        return fileName.split(".")[1];
     }
 
     private List<Persona> readPersonasWithSabanaExtension(ObjectInputStream in) throws IOException, ClassNotFoundException {

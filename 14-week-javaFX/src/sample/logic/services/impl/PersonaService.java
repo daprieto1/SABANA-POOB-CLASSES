@@ -63,7 +63,7 @@ public class PersonaService implements IPersonaServices {
     }
 
     @Override
-    public List<Persona> importPersonas(File file) throws IOException, PersonaException {
+    public List<Persona> importPersonas(File file) throws Exception {
         List<Persona> importedPersonas = new ArrayList<>();
         List<String> read = this.personaPersistence.importPersonas(file);
 
